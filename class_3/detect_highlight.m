@@ -1,6 +1,6 @@
 clc;clear;close all;
 
-img = imread("onion.png");
+img = imread("a.jpg");
 img = im2double(img);
 [h, w, ~] = size(img);
 
@@ -12,7 +12,7 @@ saturation = hsv(:, :, 2);
 value = hsv(:, :, 3);
 
 Ts = 0.35;
-Tv = 0.85;
+Tv = 0.7;
 
 Ts = repmat(Ts, [h, w]);
 Tv = repmat(Tv, [h, w]);
