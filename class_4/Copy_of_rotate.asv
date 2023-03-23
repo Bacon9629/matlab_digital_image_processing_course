@@ -1,11 +1,14 @@
 clc;clear;close all;
 
-img = imread("ngc6543a.jpg");
+pout = imread("ngc6543a.jpg");
 % pout = imread("coins.png");
-[R, C, CH] = size(img);
+[R, C, CH] = size(pout);
 
-ANGLE = -10;
-sh_x = 0.2;
+ANGLE = 0;
+% x_offset = 0;
+% y_offset = 0;
+
+sh_x = 0;
 sh_y = 0;
 
 alfa = ANGLE * pi / 180.0;
@@ -20,7 +23,7 @@ shear_trans = [
     0 0 1
     ];
 
-index = zeros([R, C, 2]);  % 儲存原圖mapping到新圖座標
+index = int16(zeros([R, C, 2]));  % 儲存原圖mapping到新圖座標
 for i = 1 : R
     for j = 1 : C
         index(i, j, :) = [i, j];
@@ -31,7 +34,7 @@ end
 % rotate
 for i = 1 : R
     for j = 1 : C
-        te = index(i, j, :);
+        te = index(i, j, :).res;
         temp = rotate_trans * [te(1); te(2); 1];
         index(i, j, :) = temp(1:2, 1);    
     end
@@ -49,15 +52,14 @@ end
 % shear - end
 
 % padding(adapt width and high of image)
-index = int16(index);
 temp = min(index(1, :, 1));
 if temp <= 0
-    index(:, :, 1) = index(:, :, 1) - temp + 1;  % padding row(y)
+    index(:, :, 1) = index(:, :, 1) - temp + 1;
 end
 
 temp = min(index(:, 1, 2));
-if temp <= 0 
-    index(:, :, 2) = index(:, :, 2) - temp + 1;  % padding col(x)
+if temp <= 0
+    index(:, :, 2) = index(:, :, 2) - temp + 1;
 end
 % padding - end
 
@@ -69,11 +71,10 @@ for r = 1 : R
         new_y = temp(1);
         new_x = temp(2);
 
-        res(new_y, new_x, :) = img(r, c, :);
+        res(new_y, new_x, :) = pout(r, c, :);
     end
 end
 % copy pixel - end
 
-figure();
-subplot(1, 2, 1), imshow(img);
+subplot(1, 2, 1), imshow(pout);
 subplot(1, 2, 2), imshow(uint8(res));
