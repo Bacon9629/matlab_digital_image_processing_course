@@ -23,6 +23,17 @@ end
 result = result + abs(min(result, [], "all"));
 result = result * (255 / max(result, [], "all"));
 
+
+% calculate distribute
+distri = zeros(R, 255);
+for i = 1:R
+    for j = 1:C
+        aa = result(i, j);
+        distri(i, aa) = distri(i, aa) + 1;
+    end
+end
+% calculate distribute - end
+
 % binary
 row_mean = mean(result, 2) + 40;
 for i = 1:R

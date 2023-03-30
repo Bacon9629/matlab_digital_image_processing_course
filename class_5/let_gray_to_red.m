@@ -32,8 +32,11 @@ for i = 1:R
 end
 % binary - end
 
-% delete small item
+% gray to red
+result2 = zeros([R, C, 3]);
+result2(:, :, 1) = result(:, :);
+% gray to red - end
 
-figure();
-subplot(1, 2, 1), imshow(uint8(result));
-subplot(1, 2, 2), imshow(ori_img);
+subplot(1, 2, 1);imshow(result2);
+subplot(1, 2, 2);imshow(ori_img);
+

@@ -31,9 +31,3 @@ for i = 1:R
     result(i, temp <= row_mean(i, 1)) = 0;
 end
 % binary - end
-
-% delete small item
-
-figure();
-subplot(1, 2, 1), imshow(uint8(result));
-subplot(1, 2, 2), imshow(ori_img);
