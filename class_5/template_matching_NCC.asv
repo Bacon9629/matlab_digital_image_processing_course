@@ -1,5 +1,0 @@
-I = imread("I.bmp");
-I = rgb2gray(I);
-figure
-imshow(I);
-w=imread(w.bmp);
