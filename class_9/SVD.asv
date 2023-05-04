@@ -1,0 +1,14 @@
+clc;clear;close all;
+i = imread('pout.tif');
+i = im2double(i);
+[u, s, v] = svd(i);
+ii = u * s * v';
+nimg = u(:, 1)*s(1, 1)*v(:, 1)';
+iii=2*i-nimg;
+figure;subplot(221), imshow(i), title('I');
+subplot(222), imshow(ii);
+title('U\times S \times V^{T}');
+subplot(223), imshow(nimg);
+title('U(:, 1) \times S(1, 1) \times V(:, 1) = nimg');
+subplot(224), imshow(iii);
+title('2 \times I - nimg');
